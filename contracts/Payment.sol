@@ -19,7 +19,7 @@ contract Payment {
 		uint start;
 		uint nextPayment;
 	}
-	mapping (uint => Plan) plans;
+	mapping (uint => Plan) public plans;
 	mapping (address => mapping(uint => Subscription)) public subscriptions;
 
 	// ===EVENTS===
@@ -55,6 +55,8 @@ contract Payment {
 		require(amount > 0, 'Amount must be greater than zero');
 		require(frequency > 0, 'Frequencry must be greater than zero');
 		plans[nextPlanId] = Plan(msg.sender, token, amount, frequency);
+		emit planCreated(msg.sender, nextPlanId, block.timestamp);
+		
 		nextPlanId++;
 	}
 
