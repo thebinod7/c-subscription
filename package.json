@@ -1,0 +1,13 @@
+{
+  "name": "c-subscription",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:thebinod7/c-subscription.git",
+  "author": "Binod Chaudhary <thebinod7@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.2"
+  }
+}
