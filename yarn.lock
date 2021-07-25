@@ -19,6 +19,11 @@ fast-diff@^1.1.2:
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
   integrity sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==
 
+openzeppelin-solidity@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/openzeppelin-solidity/-/openzeppelin-solidity-4.2.0.tgz#a5e24eabc7c7117afa328aea558561d8106e2181"
+  integrity sha512-b+VN5y9c0tdd4D/hFLHMH5QKBfj/V2mzKqQ5PyB4xXE7Y7UAf5Xia/nDzBZ5CHDCnkMGdQXlEg+iDV2cQnitfg==
+
 prettier-linter-helpers@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"

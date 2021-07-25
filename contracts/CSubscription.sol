@@ -58,7 +58,38 @@ contract Payment {
 		nextPlanId++;
 	}
 
+	// EG: 	mapping (msg.sender => mapping(planId => Subscription)) public subscriptions;
+	// 0x077... => (p1 => {subscriber:0x077..., start:date, nextPayment: date})
+	// Find subscription by subcriber and planId;
 	function subscribe(uint planId) external {
+		IERC20 token = IERC20(plans[planId].token);
+		Plan storage plan = plans[planId];
+		require(plan.merchant != address(0),'Plan does not exist');
 
+		token.transferFrom(msg.sender, plan.merchant, plan.amount);
+		emit paymentSent(msg.sender, plan.merchant, plan.amount, planId, block.timestamp);
+
+		subscriptions[msg.sender][planId] = Subscription(msg.sender, block.timestamp, block.timestamp + plan.frequency);
+		emit subscriptionCreated(msg.sender, planId, block.timestamp);
+	}
+
+	function cancelPlan(uint planId) external {
+		Subscription storage subscription = subscriptions[msg.sender][planId];
+		require(subscription.subscriber != address(0), 'Subscription does not exist');
+
+		delete subscriptions[msg.sender][planId];
+		emit subscriptionCancelled(msg.sender, planId, block.timestamp);
+	}
+
+	function pay(address subscriber, uint planId) external {
+		Subscription storage subscription = subscriptions[subscriber][planId];
+		Plan storage plan = plans[planId];
+		IERC20 token = IERC20(plan.token);
+		require(subscription.subscriber != address(0), 'Subscriber does not exist');
+		require(block.timestamp > subscription.nextPayment, 'Not due yet');
+
+		token.transferFrom(subscriber, plan.merchant, plan.amount);
+		emit paymentSent(subscriber, plan.merchant, plan.amount, planId, block.timestamp);
+		subscription.nextPayment = subscription.nextPayment + plan.frequency;
 	}
 }
